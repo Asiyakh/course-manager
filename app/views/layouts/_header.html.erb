@@ -1,13 +1,15 @@
 <div class="container">
     <div class="row">
-        <div class="col-4">
-            test
-        </div>
-        <div class="col-4">
-            test
-        </div>
-        <div class="col-4">
-            test
+        <div class="col-12 pt-3 pb-3 mb-4 border-bottom">
+            <div class="float-right">
+                <% if account_signed_in?%>
+                    <%= link_to "Log Out", destroy_account_session_path, method: :delete, class: "btn btn-outline-primary" %>
+                <% else %>
+                    <%= link_to "Log In", new_account_session_path, class: "btn btn-outline-primary" %>
+                    <%= link_to "Sign Up", new_account_registration_path, class: "btn btn-primary" %>
+                <% end %>
+            </div>
+            <p class="h3"> Course Manager </p>
         </div>
     </div>
 </div>

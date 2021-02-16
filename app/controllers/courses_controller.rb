@@ -8,6 +8,7 @@ class CoursesController < ApplicationController
 
     def show
         @posts = @course.posts
+        @subscriber_count = @course.subscribers.count
     end
 
     def create

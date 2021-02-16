@@ -1,12 +1,25 @@
-<%= link_to "Create New Post", new_course_post_path(@course), class: "btn btn-primary float-right"%>
+<%= link_to "Create New Post", new_course_post_path(@course), class: "btn btn-primary float-right m-3"%>
+ <h3 class="p-2 mt-3"><%= @course.name%></h3>
 
-<%= @course.name%>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="">
 
-<% @posts.each do |post| %>
-    <h4><%= link_to post.title, course_post_path(@course, post) %></h4>
-    <p><%= truncate post.body, length: 200 %></p>
-<% end %>
+            <% @posts.each do |post| %>
+                <div class="card p-2">
+                    <h4><%= link_to post.title, course_post_path(@course, post) %></h4>
+                    <p><%= truncate post.body, length: 200 %></p>
 
-<small>
-    <p><%= simple_format @course.rules%></p> 
-</small>
+                </div>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="col-sm-4 float-right">
+        <p> <%= pluralize @subscriber_count, "member" %> </p>
+        <small>
+            <h6>Course Page Rules</h4>
+            <p><%= simple_format @course.rules%></p> 
+        </small>
+    </div>
+</div>

@@ -13,15 +13,17 @@
   <body>
     <%= render partial: "layouts/header" %>  
 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">   
+    <section class="bg-light pb-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">   
 
-          <%= yield %>
+            <%= yield %>
 
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <%# render partial: "layouts/footer" %>
   </body>

@@ -1,0 +1,14 @@
+<div class="card p-3"> 
+    <% @posts.each do |post| %>
+        <h4 class="mb-1"><%= link_to post.title, course_post_path(post.course_id , post) %></h4>
+
+        <p> <small>
+            <%= link_to post.course.name, course_path(post.course)%>
+            Posted by <%= link_to post.account.full_name, profile_path(post.account.utorid)%> 
+            <%= time_ago_in_words post.created_at %> ago
+        </small></p>
+
+        <p><%= truncate post.body, length: 200 %>
+        </p>
+    <% end %>
+</div>

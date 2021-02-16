@@ -24,19 +24,23 @@
     <div class="row">
         <div class="col-8 mt-4">
             <p class="h4"> Popular Posts </p>
-            left column wide
+            <div class="card p-3">
+                <% @posts.each do |post| %>
+                    <h4><%= link_to post.title, course_post_path(post.course_id , post) %></h4>
+                    <p><%= truncate post.body, length: 200 %></p>
+                <% end %>
+            </div>
         </div>
         <div class="col-4 mt-4">
             <p class="h5" mb-4>Most Popular Courses!</p>
-            
             <div class="card">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Course 1</li> 
-                    <li class="list-group-item">Course 2</li> 
-                    <li class="list-group-item">Course 3</li>
+                    <% @courses.each do |course| %>
+                        <li class="list-group-item"><%= link_to course.name, course_path(course) %> </li> 
+                    <% end %>
                 </ul> 
             </div>
-            <%= link_to "View all courses", "", class: "btn btn-outline-primary mt-3"%>
+            <%= link_to "View all courses", courses_path, class: "btn btn-outline-primary mt-3"%>
 
         </div>
     </div>

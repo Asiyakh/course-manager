@@ -1,0 +1,16 @@
+.like, .dislike {
+    display: block;
+    width: 100%;;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #000;
+
+    &.active {
+        color: #838383;
+    }
+
+    &:hover {
+        color: #90e2f7;
+        cursor: pointer;
+    }
+}

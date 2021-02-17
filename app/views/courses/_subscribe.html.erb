@@ -1,0 +1,5 @@
+
+<%= form_for @subscription do |f| %>
+    <%= f.hidden_field :course_id, value: course_id%>
+    <%= f.submit "Join Course", class: "btn btn-success float-right mt-3"%>
+<% end %>

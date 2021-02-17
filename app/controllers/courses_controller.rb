@@ -9,8 +9,11 @@ class CoursesController < ApplicationController
     def show
         @posts = @course.posts
         @subscriber_count = @course.subscribers.count
-    end
 
+        @is_subscribed = account_signed_in? ? Subscription.where(course_id: @course.id, account_id: current_account.id).any? : false
+        @subscription = Subscription.new
+    end
+ 
     def create
         @course = Course.new course_values
         @course.account_id = current_account.id
@@ -34,7 +37,7 @@ class CoursesController < ApplicationController
     end
     
     def course_values
-        params.require(:course).permit(:name, :url, :rules)
+        params.require(:course).permit(:name, :url, :summary, :rules)
     end
 
 end

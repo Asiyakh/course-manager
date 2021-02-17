@@ -1,5 +1,11 @@
-<%= link_to "Create New Post", new_course_post_path(@course), class: "btn btn-primary float-right m-3"%>
- <h3 class="p-2 mt-3"><%= @course.name%></h3>
+
+<% if @is_subscribed %>
+    <%= link_to "Create New Post", new_course_post_path(@course), class: "btn btn-primary float-right m-3"%>
+<% else %>
+    <%= render partial: "courses/subscribe", locals: { course_id: @course.id} %>
+<% end %>
+
+<h3 class="p-2 mt-3"><%= @course.name%></h3>
 
 <div class="row">
     <div class="col-sm-8">
@@ -8,6 +14,11 @@
             <% @posts.each do |post| %>
                 <div class="card p-2">
                     <h4><%= link_to post.title, course_post_path(@course, post) %></h4>
+                    <p> <small>
+                        <%= link_to post.course.name, course_path(post.course)%>
+                        Posted by <%= link_to post.account.full_name, profile_path(post.account.utorid)%> 
+                        <%= time_ago_in_words post.created_at %> ago
+                    </small></p>
                     <p><%= truncate post.body, length: 200 %></p>
 
                 </div>
@@ -16,10 +27,13 @@
     </div>
 
     <div class="col-sm-4 float-right">
-        <p> <%= pluralize @subscriber_count, "member" %> </p>
-        <small>
-            <h6>Course Page Rules</h4>
-            <p><%= simple_format @course.rules%></p> 
-        </small>
+        <div class="card p-3">
+            <h5> About this course </h5>
+            <%= @course.summary %>
+            <small>
+                <p><h6>Course Page Rules</h4><%= simple_format @course.rules%></p> 
+            </small>
+            <p> <%= pluralize @subscriber_count, "member" %> </p>
+        </div>
     </div>
 </div>

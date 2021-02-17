@@ -1,16 +1,21 @@
-<% if account_signed_in? %>
-    <div class="float-right">
-        <%= link_to "Create New Course", new_course_path, class: "btn btn-outline-primary"%>
+ <div class="row">
+    <div class="col-sm-12 mt-3">
+        <% if account_signed_in? %>
+            <div class="float-right mt-3">
+                <%= link_to "Create New Course", new_course_path, class: "btn btn-outline-primary"%>
+            </div>
+        <% end %>
     </div>
-<% end %>
-
-<% if @courses.size > 0 %>
-    <% @courses.each do |course|%>
-        </div class="card">
-            <h3><%= link_to course.name, course %></h3>
-            <%# simple_format course.rules %>
-        </div>
-    <% end%>
-<% else %>
-    <p> No courses to display. </p>
-<% end %>
+    <div class="float-left mt-3">
+        <% if @courses.size > 0 %>
+            <% @courses.each do |course|%>
+                </div class="float-left">
+                    <h5><%= link_to course.name, course %></h5>
+                    <p><%= course.summary %></p>
+                </div>
+            <% end%>
+        <% else %>
+            <p> No courses to display. </p>
+        <% end %>
+    </div>
+</div>

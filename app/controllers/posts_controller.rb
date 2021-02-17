@@ -1,12 +1,14 @@
 class PostsController < ApplicationController
     before_action :authenticate_account!, except: [ :index, :show ]
     before_action :set_post, only: [:show]
+    before_action :auth_subscriber, only:[:new]
 
     def index
         @posts = Post.all
     end
 
     def show
+        @comment = Comment.new
     end
 
     def new
@@ -31,9 +33,15 @@ class PostsController < ApplicationController
     private
 
     def set_post
-        @post = Post.find(params[:id])
+        @post = Post.includes(:comments).find(params[:id])
     end
     
+    def auth_subscriber
+        unless Subscription.where(course_id: params[:course_id], account_id: current_account.id).any?
+            redirect_to root_path, flash: { danger: "You must be signed in to view this page." }
+        end
+    end
+
     def post_values
         params.require(:post).permit(:title, :body)
     end

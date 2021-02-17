@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
     end
 
     def show
-        @posts = @course.posts
+        @posts = @course.posts.limit(20).sort_by{ |p| p.score}.reverse
         @subscriber_count = @course.subscribers.count
 
         @is_subscribed = account_signed_in? ? Subscription.where(course_id: @course.id, account_id: current_account.id).any? : false

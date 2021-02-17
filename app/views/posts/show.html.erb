@@ -1,16 +1,27 @@
+<div class="row ">
+    <div class="col-1 text-center">
+        <div id="vote-actions-<%= @post.id %>" class="vote" data-id="<%= @post.id %>">
+            <div class="fa fa-heart-o like <%= is_liked @post %>" ></div>
+            <span class="score"><%= @post.score %></span>
+            <div class="fa fa-thumbs-o-down dislike <%= is_disliked @post %>"></div>
+        </div>
+    </div>
+    <div class="col-11 col-md-10">
 
-<h2 class="mt-3"><%= @post.title %> </h2>
+        <h2 class="mt-3"><%= @post.title %> </h2>
 
-<%= simple_format @post.body %>
+        <%= simple_format @post.body %>
 
-<div id="comments">
-    <%= render partial: "posts/comments", locals: { comments: @post.comments } %>
+        <div id="comments">
+            <%= render partial: "posts/comments", locals: { comments: @post.comments } %>
+        </div>
+
+
+        <h5>Leave a comment</h5>
+        <%= form_for @comment, remote: true do |f| %>
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.text_area :message, placeholder: "Comment goes here", class: "form-control" %>
+            <%= f.submit "Submit comment", class: "btn btn-success mt-3"%>
+        <% end %>
+    </div>
 </div>
-
-
-<h5>Leave a comment</h5>
-<%= form_for @comment, remote: true do |f| %>
-    <%= f.hidden_field :post_id, value: @post.id %>
-    <%= f.text_area :message, placeholder: "Comment goes here", class: "form-control" %>
-    <%= f.submit "Submit comment", class: "btn btn-success mt-3"%>
-<% end %>

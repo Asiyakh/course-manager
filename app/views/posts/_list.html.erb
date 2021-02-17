@@ -2,10 +2,11 @@
     <div class="card p-3 mb-3"> 
         <div class="row ">
             <div class="col-1 text-center">
-                <div class="fa fa-heart-o like"></div>
-                <span>0</span>
-                <div class="fa fa-thumbs-o-down dislike"></div>
-
+                <div id="vote-actions-<%= post.id %>" class="vote" data-id="<%= post.id %>">
+                    <div class="fa fa-heart-o like <%= is_liked post %>" ></div>
+                    <span class="score"><%= post.score %></span>
+                    <div class="fa fa-thumbs-o-down dislike <%= is_disliked post %>"></div>
+                </div>
 
             </div>
 

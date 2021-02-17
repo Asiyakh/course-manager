@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2021_02_17_061438) do
   create_table "votes", force: :cascade do |t|
     t.bigint "account_id"
     t.bigint "post_id"
+    t.boolean "like"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_votes_on_account_id"

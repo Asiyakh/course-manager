@@ -3,6 +3,7 @@ class CreateVotes < ActiveRecord::Migration[6.1]
     create_table :votes do |t|
       t.references :account
       t.references :post
+      t.boolean :like
       t.timestamps
     end
   end

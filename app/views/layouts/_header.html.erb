@@ -11,12 +11,12 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <%= link_to "Profile", profile_path(current_account.utorid), class: "dropdown-item" %>
                             <%= link_to "Settings", edit_account_registration_path, class: "dropdown-item" %>
-                            <%= link_to "Log Out", destroy_account_session_path, class: "dropdown-item" %>
+                            <%= link_to "Log Out", destroy_account_session_path, method: "DELETE", class: "dropdown-item" %>
                         </div>
                     </div>
                 <% else %>
                     <%= link_to "Log In", new_account_session_path, class: "btn btn-outline-primary" %>
-                    <%= link_to "Sign Up", new_account_registration_path, class: "btn btn-primary" %>
+                    <%= link_to "Sign Up", new_account_registration_path, class: "btn btn-primary"%>
                 <% end %>
             </div>
             <p class="h3"> <%= link_to "Course Manager", root_path %> </p>

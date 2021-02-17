@@ -1,8 +1,10 @@
 class VotesController < ApplicationController
 
     def create 
-        post_id = params[:vote][:post_id]
-        vote = Vote.new( vote_params )
+        post_id = params[:post_id]
+        vote = Vote.new
+        vote.post_id = params[:post_id]
+        vote.like = params[:like]
         vote.account_id = current_account.id
 
         existing_vote = Vote.where(account_id: current_account.id, post_id: post_id)
@@ -18,14 +20,13 @@ class VotesController < ApplicationController
                     else 
                         @success = false
                     end                
-
-                    @post = Post.find(post_id)
-                    @total_likes = @post.likes
-                    @total_dislikes = @post.dislikes
+ 
                 end
 
+                @post = Post.find(post_id)
+                @is_like = params[:like]
                 render "votes/create"
-                
+
             }
         end
     end
@@ -34,4 +35,5 @@ class VotesController < ApplicationController
 
     def vote_params
         params.require(:vote).permit(:like, :post_id)
+    end
 end

@@ -1,4 +1,4 @@
- <div class="row">
+<div class="row">
     <div class="col-sm-12 mt-3">
         <% if account_signed_in? %>
             <div class="float-right mt-3">
@@ -6,16 +6,17 @@
             </div>
         <% end %>
     </div>
-    <div class="float-left mt-3">
-        <% if @courses.size > 0 %>
-            <% @courses.each do |course|%>
-                </div class="float-left">
-                    <h5><%= link_to course.name, course %></h5>
-                    <p><%= course.summary %></p>
-                </div>
-            <% end%>
-        <% else %>
-            <p> No courses to display. </p>
-        <% end %>
+
+    </div class="card">
+        <div class="col">
+            <% if @courses.size > 0 %>
+                <% @courses.each do |course|%>
+                        <h5><%= link_to course.name, course %></h5>
+                        <p><%= simple_format course.summary %></p>
+                <% end%>
+            <% else %>
+                <p> No courses to display. </p>
+            <% end %>
+        </div>
     </div>
 </div>
